@@ -1,0 +1,339 @@
+;(load "Mr1ay\0noExplore")
+;(load "Mr1ay\0rule")
+;(load "Mr1ay\.time")
+;(load "Mr1ay\1build")
+;(load "Mr1ay\2unit")
+;(load "Mr1ay\3convertmoney")
+;tribute-to-player any-ally food 10000)
+;; (resource-found wood)
+;(load "Mr1ay\r")
+;(load "Mr1ay\list1") 
+;(load "Mr1ay\Fx4")
+
+
+(load "Mr1ay\yok\dur")
+
+
+(defrule
+    (game-time < 3) 
+    =>
+        (set-strategic-number sn-maximum-town-size 10)
+        (set-strategic-number sn-minimum-town-size 0 )
+        (set-strategic-number sn-percent-civilian-builders 100)
+        (set-strategic-number sn-cap-civilian-builders 5)
+        (set-strategic-number sn-percent-civilian-gatherers 0)
+        (set-strategic-number sn-cap-civilian-gatherers 0)
+        (set-strategic-number sn-percent-civilian-explorers 0)
+        (set-strategic-number sn-cap-civilian-explorers  0)
+        (set-strategic-number  sn-food-gatherer-percentage 0)
+        (set-strategic-number  sn-wood-gatherer-percentage 0)
+        (set-strategic-number  sn-gold-gatherer-percentage 0)
+        (set-strategic-number sn-stone-gatherer-percentage 0)
+        (set-strategic-number sn-enable-new-building-system 1)
+)
+
+
+(defrule  
+    (game-time < 30)
+    (building-type-count-total  house != 1)
+    (can-build house) 
+    =>
+        (set-strategic-number sn-percent-civilian-builders 100)
+        (set-strategic-number sn-cap-civilian-builders 25)
+        (set-strategic-number sn-enable-new-building-system 1)
+        (build house) 
+        (disable-self)
+)
+
+
+(defrule 
+    (game-time < 60)   
+    (building-type-count-total  house == 1)
+    (building-type-count-total  stable < 3)
+
+    (can-build stable) 
+    =>
+        (set-strategic-number sn-percent-civilian-builders 100)
+        (set-strategic-number sn-cap-civilian-builders 25)
+        (set-strategic-number sn-enable-new-building-system 1)
+        (build stable)  
+)
+
+
+(defrule 
+    (game-time < 120)   
+    (building-type-count-total  stable == 3)
+    (building-type-count-total  house < 3)
+
+    (can-build house) 
+    =>
+        (set-strategic-number sn-percent-civilian-builders 100)
+        (set-strategic-number sn-cap-civilian-builders 25)
+        (set-strategic-number sn-enable-new-building-system 1)
+        (build house)  
+)
+
+
+
+(defrule 
+    (game-time < 120)   
+    (building-type-count-total  stable < 5)
+    (building-type-count-total  house == 3)
+
+    (can-build stable) 
+    =>
+        (set-strategic-number sn-percent-civilian-builders 100)
+        (set-strategic-number sn-cap-civilian-builders 25)
+        (set-strategic-number sn-enable-new-building-system 1)
+        (build stable)  
+)
+
+
+(defrule 
+    (game-time < 180)   
+    (building-type-count-total  stable == 5)
+        (building-type-count-total  archery-range < 3)
+    (can-build archery-range) 
+    =>
+        (set-strategic-number sn-percent-civilian-builders 100)
+        (set-strategic-number sn-cap-civilian-builders 25)
+        (build archery-range) 
+)
+ 
+
+(defrule 
+    (game-time < 240)   
+    (building-type-count-total  house < 6)
+        (building-type-count-total  archery-range == 3)
+    (can-build house) 
+    =>
+        (set-strategic-number sn-maximum-town-size 12)
+        (set-strategic-number sn-minimum-town-size 0 )
+        (set-strategic-number sn-percent-civilian-builders 100)
+        (set-strategic-number sn-cap-civilian-builders 15)
+        (build house) 
+)
+
+(defrule 
+    (game-time < 300)   
+    (building-type-count-total  house == 6)
+        (building-type-count-total  archery-range < 8)
+    (can-build archery-range) 
+    =>
+        (set-strategic-number sn-maximum-town-size 15)
+        (set-strategic-number sn-minimum-town-size 0 )
+        (set-strategic-number sn-percent-civilian-builders 100)
+        (set-strategic-number sn-cap-civilian-builders 15)
+        (build archery-range) 
+)
+
+(defrule 
+    (game-time < 450)   
+    (building-type-count-total  house < 30)
+        (building-type-count-total  archery-range == 8)
+    (can-build house) 
+    =>
+        (set-strategic-number sn-percent-civilian-builders 100)
+        (set-strategic-number sn-cap-civilian-builders 15)
+        (build house) 
+)
+
+
+(defrule 
+    (game-time < 360)   
+    (building-type-count-total  archery-range == 8)
+        (building-type-count-total  siege-workshop < 2)
+    (can-build siege-workshop) 
+    =>
+        (set-strategic-number sn-percent-civilian-builders 100)
+        (set-strategic-number sn-cap-civilian-builders 15)
+        (build siege-workshop) 
+)
+
+(defrule 
+    (game-time == 300)    
+    =>
+        (set-strategic-number sn-maximum-town-size 20)
+        (set-strategic-number sn-minimum-town-size 0 ) 
+)
+
+(defrule 
+    (game-time == 420)    
+    =>
+        (set-strategic-number sn-maximum-town-size 25)
+        (set-strategic-number sn-minimum-town-size 0 ) 
+)
+
+(defrule 
+    (game-time == 480)    
+    =>
+        (set-strategic-number sn-maximum-town-size 30)
+        (set-strategic-number sn-minimum-town-size 0 ) 
+)
+
+(defrule 
+    (game-time == 540)    
+    =>
+        (set-strategic-number sn-maximum-town-size 35)
+        (set-strategic-number sn-minimum-town-size 0 ) 
+)
+
+(defrule 
+    (game-time == 600)    
+    =>
+        (set-strategic-number sn-maximum-town-size 40)
+        (set-strategic-number sn-minimum-town-size 0 )  
+ 
+)
+
+
+(defrule 
+    (game-time == 660)    
+    =>
+        (set-strategic-number sn-maximum-town-size 45)
+        (set-strategic-number sn-minimum-town-size 0 ) 
+  
+)
+
+(defrule 
+(game-time == 660) 
+    (building-type-count-total outpost < 1)  
+    (can-build outpost)
+    =>
+        (build outpost)
+)
+
+
+
+
+(defrule 
+(game-time == 660) 
+    (building-type-count-total outpost == 1)    
+    =>  
+        (set-strategic-number sn-food-gatherer-percentage 50)
+        (set-strategic-number sn-wood-gatherer-percentage 20)
+        (set-strategic-number sn-gold-gatherer-percentage 25)
+        (set-strategic-number sn-stone-gatherer-percentage 5)
+ 
+)
+
+
+
+(defrule 
+    (game-time < 420)   
+    (building-type-count-total  siege-workshop == 2) 
+    (building-type-count-total  monastery != 1) 
+    (can-build monastery)
+    =>
+        (build monastery)
+)
+
+(defrule 
+    (game-time < 420)   
+    (building-type-count-total  siege-workshop == 2) 
+    (building-type-count-total  market != 1) 
+    (can-build market)
+    =>
+        (build market)
+)
+
+(defrule 
+    (game-time < 900)     
+    (building-type-count-total  market == 1) 
+    (building-type-count-total  house < 85) 
+    (can-build house)
+    => 
+        (build house)
+)
+
+(defrule 
+    (game-time == 700)      
+    (building-type-count-total  mining-camp < 1)
+    (can-build mining-camp)  
+    => 
+          (build  mining-camp)
+)
+
+ 
+ 
+
+
+
+
+
+
+
+(defrule
+    (unit-type-count-total villager < 200)
+    (can-train villager)   
+    =>
+        (train villager)    
+)
+  
+
+(defrule 
+    (unit-type-count cavalier < 50)
+    (can-train knight-line) 
+    =>
+        (train knight-line)    
+)
+
+
+
+(defrule 
+    (unit-type-count hand-cannoneer < 128)
+    (can-train hand-cannoneer) 
+    =>
+        (train hand-cannoneer)    
+)
+
+;(defrule 
+;    (unit-type-count crossbowman < 28)
+;    (can-train hand-cannoneer) 
+;    =>
+;        (train hand-cannoneer)    
+;)
+
+
+(defrule 
+    (unit-type-count bombard-cannon < 16)
+    (can-train bombard-cannon) 
+    =>
+        (train bombard-cannon)    
+)
+
+
+(defrule 
+    (unit-type-count monk < 16)
+    (can-train monk) 
+    =>
+        (train monk)    
+)
+
+;convert(stone) 
+(defrule
+    (building-type-count-total market == 1)
+    (stone-amount > 201)
+    (can-sell-commodity stone) 
+    =>
+        (sell-commodity stone)
+)
+
+
+;convert(wood)
+(defrule
+    (building-type-count-total market == 1)
+    (wood-amount > 8000)
+    (can-sell-commodity wood) 
+    =>
+    (sell-commodity wood)
+)
+
+;convert(food)
+(defrule
+    (building-type-count-total market == 1)
+    (wood-amount > 10000)
+    (can-sell-commodity food) 
+    =>
+    (sell-commodity food)
+)
